@@ -1,6 +1,6 @@
 #!/bin/bash
 # ----------------------------------------------------------------------------
-# Script Name: update_traefik.sh
+# Script Name: traefik_update.sh
 # Description: Tool designed to update Traefik
 # Author: peterweissdk
 # Email: peterweissdk@flems.dk
@@ -12,7 +12,7 @@
 # Global variables
 VERSION=""
 LOG_DIR="/var/log/"
-LOG_FILE="${LOG_DIR}/update_traefik.log"
+LOG_FILE="${LOG_DIR}/traefik_update.log"
 DOWNLOAD_DIR=""
 DOWNLOAD_DIR_BASE="/root/traefikBinary/"
 INSTALL_DIR="/usr/local/bin"
