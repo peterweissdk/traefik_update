@@ -5,7 +5,7 @@
 # Author: peterweissdk
 # Email: peterweissdk@flems.dk
 # Date: 2025-05-07
-# Version: v0.1.0
+# Version: v0.2.0
 # Usage: Run script, or add it to cron
 # ----------------------------------------------------------------------------
 
