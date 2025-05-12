@@ -1,6 +1,6 @@
 # 💾 Traefik Update Script
 
-A shell script to automate the process of updating Traefik configurations and deployments.
+A shell script to automate the process of updating Traefik configurations and deployments. **Important:** This script is designed to work exclusively with Traefik binary installations where Traefik is deployed in `/usr/local/bin`.
 
 ## ✨ Features
 
@@ -8,18 +8,21 @@ A shell script to automate the process of updating Traefik configurations and de
 - Safe deployment handling
 - Rollback functionality
 - Error handling and logging
-- Configuration validation
 
 ### Command Options
 
 ```bash
 -u  Update Traefik to latest version
--y  Auto-confirm all prompts
+-y  Auto-confirm all prompts (only applies for -u)
 -r  Rollback to previous version
 -c  Check current Traefik status
 ```
 
 ## 🚀 Quick Start
+
+### Prerequisites
+- Traefik must be installed as a binary in `/usr/local/bin`
+- Script requires root privileges for updates
 
 1. Clone this repository
 2. Make the script executable:
