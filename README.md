@@ -1,10 +1,10 @@
 # 💾 Traefik Update Script
 
-A shell script to automate the process of updating Traefik configurations and deployments. **Important:** This script is designed to work exclusively with Traefik binary installations where Traefik is deployed in `/usr/local/bin`.
+A shell script to automate the process of updating Traefik deployments. **Important:** This script is designed to work exclusively with Traefik binary installations where Traefik is deployed in `/usr/local/bin`.
 
 ## ✨ Features
 
-- Automated Traefik configuration updates
+- Automated Traefik updates
 - Safe deployment handling
 - Rollback functionality
 - Error handling and logging
