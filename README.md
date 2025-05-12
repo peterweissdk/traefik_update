@@ -1,4 +1,7 @@
 # 💾 Traefik Update Script
+[![Static Badge](https://img.shields.io/badge/Traefik-Proxy-white?style=flat&logo=traefikproxy&logoColor=white&logoSize=auto&labelColor=black)](https://traefik.io/)
+[![Static Badge](https://img.shields.io/badge/Bash-script-white?style=flat&logo=gnubash&logoColor=white&logoSize=auto&labelColor=black)](https://www.gnu.org/software/bash/)
+[![Static Badge](https://img.shields.io/badge/GPL-V3-white?style=flat&logo=gnu&logoColor=white&logoSize=auto&labelColor=black)](https://www.gnu.org/licenses/gpl-3.0.en.html/)
 
 A shell script to automate the process of updating Traefik deployments. **Important:** This script is designed to work exclusively with Traefik binary installations where Traefik is deployed in `/usr/local/bin`.
 
