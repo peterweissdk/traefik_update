@@ -329,11 +329,23 @@ check_version_available() {
 main() {
     AUTO_YES=false
 
-    # Parse command line arguments
-    while getopts "yrcu" opt; do
+    # First pass: check for -y flag
+    while getopts ":y" opt 2>/dev/null; do
         case $opt in
             y)
                 AUTO_YES=true
+                ;;
+        esac
+    done
+
+    # Reset getopts
+    OPTIND=1
+
+    # Second pass: process action flags
+    while getopts "yrcu" opt; do
+        case $opt in
+            y)
+                # Already handled
                 ;;
             r)
                 rollback
