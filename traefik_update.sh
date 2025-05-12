@@ -219,6 +219,7 @@ update() {
     cleanup
     log "INFO" "Traefik has been successfully updated to v$VERSION"
     traefik version
+    return 0
 }
 
 # Rollback function
@@ -303,53 +304,67 @@ rollback() {
     
     log "INFO" "Successfully rolled back to $selected_version"
     traefik version
+    return 0
+}
+
+# Check if a new version is available and return 0 if yes, -1 if no
+check_version_available() {
+    local current_version github_version
+    current_version=$(get_current_version)
+    github_version=$(get_github_version)
+
+    log "INFO" "Current Traefik version: $current_version"
+    log "INFO" "Latest GitHub version:   $github_version"
+
+    if [ "$current_version" = "$github_version" ]; then
+        log "INFO" "You have the latest version of Traefik installed."
+        return -1
+    fi
+
+    log "INFO" "A newer version of Traefik is available."
+    return 0
 }
 
 # Main script execution
 main() {
-    # Parse command line arguments
     AUTO_YES=false
-    while getopts "ury" flag; do
-        case "${flag}" in
-            u) 
-                ACTION="update"
-                ;;
-            r)
-                ACTION="rollback"
-                ;;
+
+    # Parse command line arguments
+    while getopts "yrcu" opt; do
+        case $opt in
             y)
                 AUTO_YES=true
                 ;;
-            *)
-                log "ERROR" "Invalid option. Usage: $0 [-u|-r] [-y]"
-                return 1
+            r)
+                rollback
+                exit $?
+                ;;
+            c)
+                check_version_available
+                exit $?
+                ;;
+            u)
+                update
+                exit $?
+                ;;
+            \?|:)
+                echo "Usage: $0 [-y] [-r] [-c] [-u]" >&2
+                echo "Options:" >&2
+                echo "  -y  Auto-yes to prompts" >&2
+                echo "  -r  Rollback to previous version" >&2
+                echo "  -c  Check if new version is available" >&2
+                echo "  -u  Update Traefik if new version is available" >&2
+                exit 1
                 ;;
         esac
     done
-
-    # If no flags are provided, show usage
-    if [ $OPTIND -eq 1 ]; then
-        echo -e "ERROR: No options were passed.\nUsage: $0 [-u|-r] [-y]\n  -u: Update Traefik\n  -r: Rollback to previous version\n  -y: Automatic yes to prompts"
-        return 1
-    fi
-
-    # Execute the selected action
-    case "$ACTION" in
-        update)
-            update
-            return 0
-            ;;
-        rollback)
-            rollback
-            return 0
-            ;;
-        *)
-            log "ERROR" "Please specify either -u for update or -r for rollback"
-            return 1
-            ;;
-    esac
 }
 
-# Execute main and exit with its return code
+# Initialize environment
+init
+# Check dependencies
+check_dependencies
+# Execute main function
 main "$@"
+# Exit with the return code of the main function
 exit $?
